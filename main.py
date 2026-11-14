@@ -1,5 +1,6 @@
 """Orquestador principal de shorts-generator."""
 import sys
+import random
 from pathlib import Path
 
 from combinator import load_phrases, make_pairs
@@ -16,7 +17,7 @@ def generate_batch(n: int, seed: int | None = None) -> list[str]:
     if len(frases) < 2:
         raise ValueError("Necesitas al menos 2 frases en frases.txt")
 
-    pares = make_pairs(frases, n=n, seed=seed)
+    pares = make_pairs(frases, n=n, seed=seed if seed is not None else random.randint(0,99999) )
     if not pares:
         print("No se generaron pares. Revisa frases.txt.")
         return []
